@@ -322,7 +322,7 @@ class Node extends React.Component<PropsType, StateType> {
         <div style={headWrapperStyle}>
           <div style={sharedHeadStyle} {...headEvents}>
             &lt;
-            {showCopyableInput ? 
+            {showCopyableInput ?
               <input ref={this._setHeadRef} defaultValue={nameString} readOnly="readonly" size={nameString.length} style={copyableElementName} />
               : <span ref={this._setHeadRef} style={jsxSingleLineTagStyle} onDoubleClick={onNameDoubleClick}>{name}</span>
             }
@@ -377,7 +377,7 @@ class Node extends React.Component<PropsType, StateType> {
           {collapsed ? '▶' : '▼'}
         </span>
         &lt;
-        {showCopyableInput ? 
+        {showCopyableInput ?
           <input ref={this._setHeadRef} defaultValue={nameString} readOnly="readonly" size={nameString.length} style={copyableElementName} />
           : <span ref={this._setHeadRef} style={jsxOpenTagStyle} onDoubleClick={onNameDoubleClick}>{name}</span>
         }

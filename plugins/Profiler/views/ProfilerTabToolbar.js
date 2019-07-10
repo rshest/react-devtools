@@ -17,11 +17,10 @@ import React, { Fragment } from 'react';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import Hoverable from '../../../frontend/Hoverable';
 import SvgIcon from '../../../frontend/SvgIcon';
+import RadioOption from '../../../frontend/RadioOption';
 import Icons from '../../../frontend/Icons';
 import IconButton from './IconButton';
 import SnapshotSelector from './SnapshotSelector';
-
-const CHART_RADIO_LABEL_WIDTH_THRESHOLD = 650;
 
 type SelectSnapshot = (snapshot: Snapshot) => void;
 
@@ -193,67 +192,6 @@ const HRule = ({ theme }) => (
     margin: '0px 0.5rem 0 0.25rem',
   }} />
 );
-
-type RadioOptionProps = {|
-  icon: string,
-  isChecked: boolean,
-  isDisabled: boolean,
-  label: string,
-  isHovered: boolean,
-  onChange: Function,
-  onMouseEnter: Function,
-  onMouseLeave: Function,
-  theme: Theme,
-  width: number,
-|};
-
-const RadioOption = Hoverable(({
-  icon,
-  isChecked,
-  isDisabled = false,
-  isHovered,
-  label,
-  onChange,
-  onMouseEnter,
-  onMouseLeave,
-  theme,
-  width,
-}: RadioOptionProps) => (
-  <label
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-    style={{
-      color: isHovered ? theme.state06 : 'inherit',
-      marginRight: '0.5rem',
-      cursor: 'pointer',
-      opacity: isDisabled ? 0.5 : 1,
-      pointerEvents: isDisabled ? 'none' : 'auto',
-    }}
-    title={label}
-  >
-    <input
-      disabled={isDisabled}
-      type="radio"
-      checked={isChecked}
-      onChange={onChange}
-    />
-    <SvgIcon
-      path={icon}
-      style={{
-        flex: '0 0 1rem',
-        width: '1rem',
-        height: '1rem',
-        fill: 'currentColor',
-        display: 'inline',
-        verticalAlign: 'sub',
-        margin: '0 0.25rem',
-      }}
-     />
-    {width >= CHART_RADIO_LABEL_WIDTH_THRESHOLD && (
-      <span>{label}</span>
-    )}
-  </label>
-));
 
 const RecordButton = Hoverable(
   ({ isActive, isHovered, onClick, onMouseEnter, onMouseLeave, theme }) => (

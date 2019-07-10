@@ -1,0 +1,19 @@
+.legend {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #555555;
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  opacity: 0.8;
+}
+
+.legendLine {
+  color: white;
+  margin-left: 3px;
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
