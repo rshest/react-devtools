@@ -1,0 +1,15 @@
+.legend {
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  background-color: #555555;
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  opacity: 0.8;
+}
+
+.legendLine {
+  color: white;
+  margin-left: 3px;
+}

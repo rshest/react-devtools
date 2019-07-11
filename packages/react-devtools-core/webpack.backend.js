@@ -13,7 +13,7 @@ const {readFileSync} = require('fs');
 const {resolve} = require('path');
 const webpack = require('webpack');
 
-const __DEV__ = process.env.NODE_ENV !== 'production';
+const __DEV__ = true;//process.env.NODE_ENV !== 'production';
 
 module.exports = {
   mode: __DEV__ ? 'development' : 'production',

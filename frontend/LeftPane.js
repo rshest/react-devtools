@@ -16,6 +16,8 @@ var PropTypes = require('prop-types');
 var React = require('react');
 var SettingsPane = require('./SettingsPane').default;
 var TreeView = require('./TreeView');
+var HierarchyPlotView = require('./HierarchyPlotView').default;
+
 
 type Props = {
   reload?: () => void,
@@ -23,17 +25,32 @@ type Props = {
 
 type State = {
   focused: boolean,
+  viewType: string,
 };
 
 class LeftPane extends React.Component<Props, State> {
   input: ?HTMLElement;
   state: State;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewType: 'overview',
+    };
+  }
+
   render() {
+    const {viewType} = this.state;
     return (
       <div style={styles.container}>
-        <SettingsPane />
-        <TreeView reload={this.props.reload} />
+        <SettingsPane
+          selectedViewType={viewType}
+          selectViewType={vt => this.setState({viewType: vt})}
+        />
+        {viewType == 'overview' ?
+          <HierarchyPlotView reload={this.props.reload} showLegend={true}/> :
+          <TreeView reload={this.props.reload}/>
+        }
       </div>
     );
   }

@@ -14,8 +14,12 @@ import React, {Component, createRef} from 'react';
 import {findDOMNode} from 'react-dom';
 import SvgIcon from './SvgIcon';
 import Icons from './Icons';
+import RadioOption from './RadioOption';
 import decorate from './decorate';
 import styles from './SettingsPane.css';
+
+
+type ViewType = 'tree' | 'overview';
 
 type EventLike = {
   keyCode: number,
@@ -75,8 +79,8 @@ class SettingsPane extends Component {
   }
 
   render() {
-    const searchText = this.props.searchText;
-
+    const {theme} = this.context;
+    const {searchText, selectedViewType, selectViewType} = this.props;
     return (
       <div className={styles.SettingsPane}>
         {this.context.showInspectButton && (
@@ -112,6 +116,22 @@ class SettingsPane extends Component {
           )}
         </div>
 
+        <RadioOption
+          icon={Icons.DOM_ELEMENT}
+          isChecked={selectedViewType === 'tree'}
+          label="Tree"
+          onChange={() => selectViewType('tree')}
+          theme={theme}
+          width={1000}
+        />
+        <RadioOption
+          icon={Icons.RANKED_CHART}
+          isChecked={selectedViewType === 'overview'}
+          label="Overview"
+          onChange={() => selectViewType('overview')}
+          theme={theme}
+          width={1000}
+        />
         <button
           className={styles.SettingsMenuButton}
           onClick={this.props.showPreferencesPanel}
@@ -126,11 +146,14 @@ class SettingsPane extends Component {
 
 SettingsPane.contextTypes = {
   showInspectButton: PropTypes.bool.isRequired,
+  theme: PropTypes.object.isRequired,
 };
+
 SettingsPane.propTypes = {
   isInspectEnabled: PropTypes.bool,
   isRecording: PropTypes.bool,
   searchText: PropTypes.string,
+  selectedViewType: PropTypes.string,
   selectFirstSearchResult: PropTypes.func,
   toggleRecord: PropTypes.func,
   onChangeSearch: PropTypes.func,
@@ -138,6 +161,11 @@ SettingsPane.propTypes = {
 };
 
 const Wrapped = decorate({
+  shouldUpdate(nextProps, prevProps) {
+    return (
+      nextProps.selectedViewType !== prevProps.selectedViewType
+    );
+  },
   listeners(props) {
     return ['isInspectEnabled', 'isRecording', 'searchText'];
   },
